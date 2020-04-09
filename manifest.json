@@ -1,0 +1,39 @@
+{
+
+  "description": "Plegar coses",
+  "manifest_version": 2,
+  "name": "PliegOS",
+  "version": "1.0",
+  "homepage_url": "http://www.pliegos.net/",
+  "icons": {
+    "48": "icons/beasts-48.png"
+    
+  },
+
+  "permissions": [
+    "<all_url>",
+    "activeTab",
+    "*://developer.mozilla.org/*",
+    "*://192.168.100.108:8080/*",
+    "webRequest"
+  ],
+
+  "background": {
+    "scripts": ["/popup/popup.js"]
+  },
+
+  "browser_action": {
+    "default_icon": "icons/icona32.png",
+    "theme_icons": [{
+        "light": "icons/icona32light.png",
+        "dark": "icons/icona32.png",
+        "size": 32
+    }],
+    "default_title": "PliegOS",
+    "default_popup": "popup/popup.html"
+  },
+
+  "web_accessible_resources": [
+  ]
+
+}

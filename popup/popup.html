@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+  <div>
+    <span id="title">PliegOS</span>
+    <table>
+      <tr>
+        <td>
+          Size
+        </td>
+        <td>
+          <span class="custom-dropdown small">
+            <select name="size" class = "seleccionable" id="size">
+              <option selected="yes" value="A4">A4</option>
+              <option value="A3">A3</option>
+            </select>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          nUp
+        </td>
+        <td>
+          <!--<select name="nUp">
+            <option selected = "yes">8</option>
+            <option selected>4</option>
+            <option selected>2</option>
+          </select>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script>
+            /* JS for demo only */
+var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
+
+colors.each(function (color) {
+  $$('.color-picker')[0].insert(
+    '<div class="square" style="background: #' + color + '"></div>'
+  );
+});
+
+$$('.color-picker')[0].on('click', '.square', function(event, square) {
+  background = square.getStyle('background');
+  $$('.custom-dropdown select').each(function (dropdown) {
+    dropdown.setStyle({'background' : background});
+  });
+});
+
+/*
+ * Original version at
+ * http://red-team-design.com/making-html-dropdowns-not-suck
+ */ 
+            </script> -->
+          <span class="custom-dropdown small">
+            <select name="nUp" class = "seleccionable" id="nUp">
+              <option value="8">8</option>
+              <option value="4" selected="yes">4</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div id="popup-content">
+    <div class="button getInfo">Plegar!</div>
+  </div>
+  <div id="error-content" class="hidden">
+    <p>PliegOS doesn't work here;(</p>
+    <p>Try on other!</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+
+
+</html>

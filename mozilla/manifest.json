@@ -11,9 +11,9 @@
   },
 
   "permissions": [
-    "<all_url>",
     "activeTab",
     "*://developer.mozilla.org/*",
+    "*://www.pliegos.net/*", 
     "*://192.168.100.108:8080/*",
     "webRequest"
   ],

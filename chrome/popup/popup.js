@@ -3,7 +3,7 @@
 //POP-UP SCRIPT
 
 
-const SERVER = "http://192.168.100.108:8080/user/";
+const SERVER = "http://www.pliegos.net/maker/addon_pdf/aveurecarregamanual.php";
 var tabClass = "";
 var tabUrl = "";
 /**

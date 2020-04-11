@@ -13,10 +13,9 @@ var tabUrl = "";
 function listenForClicks() {
   document.addEventListener("click", (e) => { //e = Element al que cliquem
 
-
     function getInfo(tabs) {
       if (tabClass == "pdf") {
-        let msg = { type: "pdf", data: {pdfUrl: tabUrl}, options: getOptions()};
+        let msg = { type: "pdf", data: { pdfUrl: tabUrl }, options: getOptions() };
         let server = SERVER + "sendContent";
         postRequest(server, msg)
           .then((response) => newTabResponse(response))
@@ -72,7 +71,7 @@ function reportExecuteScriptError(error) {
 function handleMessage(msg, sender, sendResponse) {
 
   let server = SERVER + "sendContent";
-  let json = { type: "text", data: msg.article, options: getOptions()};
+  let json = { type: "text", data: msg.article, options: getOptions() };
   //Compte que es async:
   postRequest(server, json)
     .then((response) => newTabResponse(response))

@@ -1,29 +1,27 @@
 {
 
-  "description": "Plegar coses",
+  "description": "Transform any webpage into a portable book",
   "manifest_version": 2,
   "name": "PliegOS",
   "version": "1.0",
   "homepage_url": "http://www.pliegos.net/",
   "icons": {
-    "48": "icons/beasts-48.png"
-    
+    "48": "icons/logoPliegOMaker_48.png"
   },
 
   "permissions": [
     "activeTab",
     "*://developer.mozilla.org/*",
     "*://www.pliegos.net/*", 
-    "*://192.168.100.108:8080/*",
     "webRequest"
   ],
 
 
   "browser_action": {
-    "default_icon": "icons/icona32.png",
+    "default_icon": "icons/logoPliegOMaker_32.png",
     "theme_icons": [{
-        "light": "icons/icona32light.png",
-        "dark": "icons/icona32.png",
+        "light": "icons/logoPliegOMaker_32.png",
+        "dark": "icons/logoPliegOMaker_32.png",
         "size": 32
     }],
     "default_title": "PliegOS",
@@ -32,5 +30,4 @@
 
   "web_accessible_resources": [
   ]
-
 }

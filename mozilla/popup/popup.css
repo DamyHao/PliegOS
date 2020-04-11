@@ -7,11 +7,15 @@ html, body {
 
 #title {
   font-family: 'Roboto', regular;
- font-size: 28px;
+  font-size: 28px;
 }
 
 .hidden {
   display: none;
+}
+
+.error {
+  font-family: 'Roboto', regular;
 }
 
 .button {

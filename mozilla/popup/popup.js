@@ -3,7 +3,7 @@
 //POP-UP SCRIPT
 
 
-const SERVER = "http://192.168.100.108:8080/user/";
+const SERVER = "http://www.pliegos.net/maker/addon_pdf/aveurecarregamanual.php";
 var tabClass = "";
 var tabUrl = "";
 /**
@@ -16,8 +16,7 @@ function listenForClicks() {
     function getInfo(tabs) {
       if (tabClass == "pdf") {
         let msg = { type: "pdf", data: { pdfUrl: tabUrl }, options: getOptions() };
-        let server = SERVER + "sendContent";
-        postRequest(server, msg)
+        postRequest(SERVER, msg)
           .then((response) => newTabResponse(response))
           .catch((err) => console.error(err));
         //Si es normal trobarem les accions al handler del missatge del front
@@ -37,10 +36,6 @@ function listenForClicks() {
       console.error(`Could not beastify: ${error}`);
     }
 
-    //Retorna opcions seleccionades
-
-
-
     if (e.target.classList.contains("getInfo")) {
       browser.tabs.query({ active: true, currentWindow: true }) //Get active tab
         .then(getInfo)
@@ -49,6 +44,7 @@ function listenForClicks() {
   });
 }
 
+//Retorna opcions seleccionades
 function getOptions() {
   var options = {};
   options.size = document.getElementById('size').value;
@@ -56,24 +52,27 @@ function getOptions() {
   return options;
 }
 
-/**
- * There was an error executing the script.
- * Display the popup's error message, and hide the normal UI.
- */
+//Reportem arror greu
 function reportExecuteScriptError(error) {
   console.error(error);
   document.querySelector("#popup-content").classList.add("hidden");
   document.querySelector("#error-content").classList.remove("hidden");
-  console.error(`Failed to execute beastify content script: ${error.message}`);
+  console.error(`Failed to inject pligos content script: ${error.message}`);
 }
+
+function mostrar(aMostrarID) {
+  document.querySelector("#popup-content").classList.add("hidden");
+  document.querySelector(aMostrarID).classList.remove("hidden");
+}
+
 
 //Contestacio del content script
 function handleMessage(msg, sender, sendResponse) {
 
-  let server = SERVER + "sendContent";
   let json = { type: "text", data: msg.article, options: getOptions() };
+  console.log(msg.article.textContent)
   //Compte que es async:
-  postRequest(server, json)
+  postRequest(SERVER, json)
     .then((response) => newTabResponse(response))
     .catch((err) => console.error(err));
   //sendResponse({ response: "Response from background script" }); i definir sendResponse
@@ -96,15 +95,16 @@ function postRequest(url, msg) {
       Http.open("POST", url, true);
       Http.setRequestHeader("Content-type", "application/json");
       var data = JSON.stringify(msg);
-      Http.send(data)
+      Http.send(data);
+      console.log("Enviada postRequest");
     } catch (err) {
+      console.error("ERROR EN LA REQUEST")
       reject(err)
     }
   })
 }
 
-function sendPDF() {
-}
+
 
 // Obra una nova tab amb la resposta:
 function newTabResponse(url) {
@@ -118,26 +118,38 @@ function newTabResponse(url) {
 
 }
 
+//Retorna el tipus de tab a partir de la variable guardad globalment
 function tabType(tab) {
-  tabUrl = tab.url;
   let splited = tabUrl.split(".");
-  return splited[splited.length - 1];
+  islocal = tabUrl.split(":");
+  if (islocal[0] == "file") {
+    return "localFile";
+  } else if (splited[splited.length - 1] == "pdf"){
+    return "pdf";
+  } else{
+    return "text";
+  }
 }
-
 
 
 browser.tabs.query({ active: true, windowId: browser.windows.WINDOW_ID_CURRENT }) // Demanar info de la tab
   .then(tabs => browser.tabs.get(tabs[0].id)) //recordem que then retorna promeses i es poden encadenar
   .then(tab => {
+    tabUrl = tab.url;
     let type = tabType(tab);
+    console.log(type)
     //Mirem de quin tipus és:
-    if (type == "pdf") {
+    if(type == "localFile") {
+      console.log("OKK")
+      mostrar("#localFile");
+    }
+    else if (type == "pdf") {
       //sendPdf(tab.url)
       tabClass = "pdf";
       /* postRequest(url, msg).then((response) => { newTabResponse(response) }) */
     }
     //Si no es pdf:
-    else {
+    else if (type == "text") {
       tabClass = "normal";
       browser.tabs.executeScript({ file: "/content_scripts/pliego.js" })
         .then(() => { browser.tabs.executeScript({ file: "/readability-master/Readability.js" }) })

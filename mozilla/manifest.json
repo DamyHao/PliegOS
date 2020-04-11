@@ -18,9 +18,6 @@
     "webRequest"
   ],
 
-  "background": {
-    "scripts": ["/popup/popup.js"]
-  },
 
   "browser_action": {
     "default_icon": "icons/icona32.png",

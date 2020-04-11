@@ -3,7 +3,7 @@
 //POP-UP SCRIPT
 
 
-const SERVER = "http://www.pliegos.net/maker/addon_pdf/aveurecarregamanual.php";
+const SERVER = "http://www.pliegos.net/maker/addon_pdf/aveurecarregamanual2.php";
 var tabClass = "";
 var tabUrl = "";
 /**
@@ -70,7 +70,6 @@ function mostrar(aMostrarID) {
 function handleMessage(msg, sender, sendResponse) {
 
   let json = { type: "text", data: msg.article, options: getOptions() };
-  console.log(msg.article.textContent)
   //Compte que es async:
   postRequest(SERVER, json)
     .then((response) => newTabResponse(response))
@@ -88,8 +87,8 @@ function postRequest(url, msg) {
         if (this.readyState == 4 && this.status == 200) {
           console.log(Http.responseText)
           // Typical action to be performed when the document is ready:
-          //resolve(Http.responseText);
-          resolve("http://www.pliegos.net/maker/pliegOmaker.php?vp=true&nup=8&hv=true&full=4&r=false&lab=0");
+          resolve(Http.responseText);
+          //resolve("http://www.pliegos.net/maker/pliegOmaker.php?vp=true&nup=8&hv=true&full=4&r=false&lab=0");
         }
       };
       Http.open("POST", url, true);
@@ -137,10 +136,10 @@ browser.tabs.query({ active: true, windowId: browser.windows.WINDOW_ID_CURRENT }
   .then(tab => {
     tabUrl = tab.url;
     let type = tabType(tab);
-    console.log(type)
+
     //Mirem de quin tipus és:
     if(type == "localFile") {
-      console.log("OKK")
+
       mostrar("#localFile");
     }
     else if (type == "pdf") {

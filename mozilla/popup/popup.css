@@ -2,6 +2,7 @@
 
 html, body {
   width: 160px;
+  font-family: 'Roboto', regular;
   background-color: #35eee7;
 }
 
@@ -44,9 +45,8 @@ html, body {
 }
 
 .seleccionable {
-  width: 70px;
+  width: 90px;
 }
-
 
 
 /* Desplegable: */
